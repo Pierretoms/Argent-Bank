@@ -1,29 +1,58 @@
-import React from 'react'
-import "./From.scss"
-import { Link } from 'react-router'
+import React, { useState } from "react";
+import "./Form.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/login.action";
 
 function Form() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  const dispatch = useDispatch();
+  const error = useSelector(({ loginReducer }) => loginReducer.error);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    dispatch(login({ email: username, password, remember }));
+  }
+
   return (
-    <form>
-          <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
-          </div>
-          <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
-          </div>
-          {/*<!-- PLACEHOLDER DUE TO STATIC SITE -->*/}
-          <Link to={'/user'} className="sign-in-button">Sign In</Link>
-          {/*<!-- SHOULD BE THE BUTTON BELOW -->*/}
-          {/*<!-- <button className="sign-in-button">Sign In</button> -->*/}
-          {/*<!--  -->*/}
-        </form>
-  )
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className="input-wrapper">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+            required
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+            required
+          />
+        </div>
+        <div className="input-remember">
+          <input
+            type="checkbox"
+            id="remember-me"
+            checked={remember}
+            onChange={() => setRemember((prev) => !prev)}
+          />
+          <label htmlFor="remember-me">Remember me</label>
+        </div>
+        <button type="submit" className="sign-in-button">Sign In</button>
+      </form>
+      {error && <p>{error}</p>}
+    </>
+  );
 }
 
-export default Form
+export default Form;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Form.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions/login.action";
+import { login } from "../../actions/signin.action";
 
 function Form() {
   const [username, setUsername] = useState("");

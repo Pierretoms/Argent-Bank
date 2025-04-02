@@ -3,7 +3,7 @@ import "./Header.scss"
 import { Link } from 'react-router'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../reducers/login.reducer";
+import { logout } from "../../reducers/signin.reducer";
 import { getProfile } from '../../actions/user.action';
 
 function Header() {

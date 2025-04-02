@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "../actions/login.action";
+import { login } from "../actions/signin.action";
 
 const initialState = {
   isLogged: !!localStorage.getItem("token"),  
@@ -30,9 +30,15 @@ const slice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.isLogged = true;
-      action.payload.remember && localStorage.setItem("token", action.payload.token);
       state.token = action.payload.token;
+    
+      if (action.payload.remember) {
+        localStorage.setItem("token", action.payload.token);
+      } else {
+        sessionStorage.setItem("token", action.payload.token);
+      }
     });
+    
     builder.addCase(login.rejected, (state, action) => {
       console.error(action.error.message);
       state.loading = false;

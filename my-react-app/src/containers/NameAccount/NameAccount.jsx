@@ -63,7 +63,7 @@ function NameAccount() {
           <h1>Edit user info</h1>
           <div id="header-inputs">
             <label htmlFor="username"> Username
-              <input type="text" id="username" value={newUserName ?? ""} onChange={event => setNewUserName(event.target.value)} />
+              <input type="text" id="username" value={newUserName ?? ""} onChange={event => setNewUserName(event.target.value)} required />
             </label>
             <label htmlFor="firstName"> First name
               <input type="text" id="firstName" value={firstName ?? ""} readOnly /> 

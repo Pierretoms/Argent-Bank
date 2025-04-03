@@ -42,6 +42,11 @@ function Header() {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
+                {isLogged && (
+                    <Link to={'/user'} className="user-name">
+                        {userName} <i className="fa fa-user-circle"></i>
+                    </Link>
+                )}
                 <Link to={'/signIn'} className='main-nav-item' onClick={handleLogout}>
                     { isLogged 
                         ? (<><i className="fa fa-sign-out"></i>Sign Out</>) 

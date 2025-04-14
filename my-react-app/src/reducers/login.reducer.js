@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "../actions/signin.action";
+import { login } from "../actions/login.action";
 
 const initialState = {
   isLogged: !!localStorage.getItem("token"),  
